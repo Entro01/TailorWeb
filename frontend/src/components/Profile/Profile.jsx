@@ -12,7 +12,7 @@ const Profile = () => {
     // Fetch user profile information from the API
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch(`/user/profile/${username}`); // Adjust the API endpoint URL as needed
+        const response = await fetch(`/api/user/profile/${username}`); // Adjust the API endpoint URL as needed
         const data = await response.json();
         setUser(data);
       } catch (error) {
@@ -26,7 +26,7 @@ const Profile = () => {
   // Function to handle logout
   const handleLogout = async () => {
     try {
-      const response = await fetch('/user/logout', {
+      const response = await fetch('/api/user/logout', {
         method: 'POST',
         credentials: 'include',
       });

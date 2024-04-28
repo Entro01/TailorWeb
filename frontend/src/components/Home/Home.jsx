@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('/products'); // Adjust the API endpoint URL as needed
+        const response = await fetch('/api/products/'); // Updated API endpoint
         const data = await response.json();
         setProducts(data);
       } catch (error) {

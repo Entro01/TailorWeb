@@ -7,7 +7,7 @@ const Cart = () => {
     // Fetch cart items from the API
     useEffect(() => {
         // Make API call to fetch cart items
-        fetch('/cart')
+        fetch('/api/cart')
             .then(response => response.json())
             .then(data => {
                 setCartItems(data.cartItems);
@@ -23,7 +23,7 @@ const Cart = () => {
         setCartItems(updatedCartItems);
 
         // Make API call to update cart item quantity
-        fetch(`/cart/${updatedCartItems[index].id}`, {
+        fetch(`/api/cart/items/${updatedCartItems[index].id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ const Cart = () => {
         setCartItems(updatedCartItems);
 
         // Make API call to remove cart item
-        fetch(`/cart/${removedItemId}`, {
+        fetch(`/api/cart/items/${removedItemId}`, {
             method: 'DELETE',
         })
             .then(response => response.json())

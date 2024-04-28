@@ -7,7 +7,7 @@ const Fabric = () => {
 
     useEffect(() => {
         // Fetch the list of fabrics from the API
-        fetch('/fabrics')
+        fetch('/api/fabrics/') // Updated API endpoint
             .then(response => response.json())
             .then(data => {
                 setFabrics(data.fabrics);

@@ -16,12 +16,12 @@ const Product = () => {
     useEffect(() => {
         const fetchProductDetails = async () => {
             // Perform API request for product details
-            const response = await fetch(`/products/products?name=${encodeURIComponent(name)}`);
+            const response = await fetch(`/api/products/products?name=${encodeURIComponent(name)}`);
             const data = await response.json();
             setProductDetails(data);
             // Fetch fabric details using the fabric name
             if (data.fabricName) {
-                const fabricResponse = await fetch(`/fabrics?name=${data.fabricName}`);
+                const fabricResponse = await fetch(`/api/fabrics?name=${data.fabricName}`);
                 const fabricData = await fabricResponse.json();
                 setFabricDetails(fabricData);
             }
@@ -41,7 +41,7 @@ const Product = () => {
         };
 
         // Perform API request to add product to cart
-        const response = await fetch('/cart/add', {
+        const response = await fetch('/api/cart/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

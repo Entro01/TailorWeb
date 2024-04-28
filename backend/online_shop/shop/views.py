@@ -3,7 +3,32 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from .models import Product, Fabric, Cart, CartItem, Order, OrderItem, UserProfile
-from .serializers import ProductSerializer, FabricSerializer, CartSerializer, OrderSerializer, UserProfileSerializer
+from .serializers import ProductSerializer, FabricSerializer, CartSerializer, OrderSerializer, UserProfileSerializer, CartItemSerializer, UserSerializer
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from rest_framework import generics, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer  # You need to create this serializer
+
+class LoginView(APIView):
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return Response({'message': 'Login successful'})
+        else:
+            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+class LogoutView(APIView):
+    def post(self, request):
+        logout(request)
+        return Response({'message': 'Logout successful'})
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
